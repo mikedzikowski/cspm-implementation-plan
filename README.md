@@ -1,39 +1,128 @@
 # cspm-implementation-plan
 
-High Level Cloud Security Posture Management (CSPM) High Level Implementation Plan
-
 # CrowdStrike CSPM 7-Day Implementation Plan
 
 ## Executive Summary
+This implementation plan outlines a structured approach to deploy CrowdStrike Cloud Security Posture Management (CSPM) over a 7-day period. The plan follows a phased approach beginning with scope definition, followed by discovery, configuration, and implementation across cloud providers, workload protection, and container image security.
 
-This implementation plan outlines a structured approach to deploy CrowdStrike Cloud Security Posture Management (CSPM) over a 7-day period. The plan follows a phased approach to ensure proper discovery, configuration, and implementation across cloud providers, workload protection, and container image security.
+## Phase 0: Scope Definition (Day 0)
+
+### Pre-Implementation Scope Decisions
+The following items require clear Yes/No decisions from the customer to define the implementation scope:
+
+1. **Cloud Provider Scope**
+   - [ ] AWS (Amazon Web Services): Yes ☐ No ☐
+   - [ ] Microsoft Azure: Yes ☐ No ☐
+   - [ ] Google Cloud Platform (GCP): Yes ☐ No ☐
+   - [ ] Oracle Cloud Infrastructure (OCI): Yes ☐ No ☐
+
+2. **Onboarding Level**
+   - AWS:
+     - [ ] Organization-level onboarding: Yes ☐ No ☐ N/A ☐
+     - [ ] Individual account onboarding: Yes ☐ No ☐ N/A ☐
+     - If individual accounts, number of accounts to onboard: _______
+   
+   - Azure:
+     - [ ] Tenant-level onboarding: Yes ☐ No ☐ N/A ☐
+     - [ ] Individual subscription onboarding: Yes ☐ No ☐ N/A ☐
+     - If individual subscriptions, number of subscriptions to onboard: _______
+   
+   - GCP:
+     - [ ] Organization-level onboarding: Yes ☐ No ☐ N/A ☐
+     - [ ] Folder-level onboarding: Yes ☐ No ☐ N/A ☐
+     - [ ] Individual project onboarding: Yes ☐ No ☐ N/A ☐
+     - If individual projects, number of projects to onboard: _______
+   
+   - OCI:
+     - [ ] Tenancy-level onboarding: Yes ☐ No ☐ N/A ☐
+     - [ ] Compartment-level onboarding: Yes ☐ No ☐ N/A ☐
+     - If compartments, number of compartments to onboard: _______
+
+3. **Workload Protection Scope**
+   - AWS:
+     - [ ] EC2 instances: Yes ☐ No ☐ N/A ☐
+     - [ ] ECS containers: Yes ☐ No ☐ N/A ☐
+     - [ ] EKS clusters: Yes ☐ No ☐ N/A ☐
+   
+   - Azure:
+     - [ ] Virtual Machines: Yes ☐ No ☐ N/A ☐
+     - [ ] AKS clusters: Yes ☐ No ☐ N/A ☐
+     - [ ] Container Apps: Yes ☐ No ☐ N/A ☐
+     - [ ] Container Instances: Yes ☐ No ☐ N/A ☐
+   
+   - GCP:
+     - [ ] Compute Engine VMs: Yes ☐ No ☐ N/A ☐
+     - [ ] GKE clusters: Yes ☐ No ☐ N/A ☐
+   
+   - OCI:
+     - [ ] Compute instances: Yes ☐ No ☐ N/A ☐
+     - [ ] OKE clusters: Yes ☐ No ☐ N/A ☐
+
+4. **Registry Assessment Scope**
+   - [ ] AWS Elastic Container Registry (ECR): Yes ☐ No ☐ N/A ☐
+   - [ ] Azure Container Registry (ACR): Yes ☐ No ☐ N/A ☐
+   - [ ] Google Container Registry (GCR): Yes ☐ No ☐ N/A ☐
+   - [ ] Google Artifact Registry: Yes ☐ No ☐ N/A ☐
+   - [ ] Docker Hub: Yes ☐ No ☐
+   - [ ] JFrog Artifactory: Yes ☐ No ☐
+   - [ ] Harbor: Yes ☐ No ☐
+   - [ ] Red Hat Quay: Yes ☐ No ☐
+   - [ ] GitLab Container Registry: Yes ☐ No ☐
+   - [ ] GitHub Container Registry: Yes ☐ No ☐
+   - [ ] Other registries (please specify): _______________________
+
+5. **CI/CD Integration Scope**
+   - [ ] CI/CD pipeline integration (shift-left): Yes ☐ No ☐
+   - If yes, select integration points:
+     - [ ] GitHub Actions: Yes ☐ No ☐
+     - [ ] GitLab CI/CD: Yes ☐ No ☐
+     - [ ] Jenkins: Yes ☐ No ☐
+     - [ ] Azure DevOps: Yes ☐ No ☐
+     - [ ] AWS CodeBuild: Yes ☐ No ☐
+     - [ ] CircleCI: Yes ☐ No ☐
+     - [ ] Other (please specify): _______________________
+
+6. **Additional Requirements**
+   - [ ] Custom dashboards: Yes ☐ No ☐
+   - [ ] Integration with existing SIEM: Yes ☐ No ☐
+   - [ ] Integration with ticketing system: Yes ☐ No ☐
+   - [ ] Custom compliance frameworks: Yes ☐ No ☐
+   - [ ] Special notification requirements: Yes ☐ No ☐
+   - [ ] Custom tagging requirements: Yes ☐ No ☐
+   - [ ] Other requirements (please specify): _______________________
+
+**Scope Approval:**
+- Customer Approval Name: _______________________
+- Customer Approval Signature: _______________________
+- Date: _______________________
+- CrowdStrike Implementation Lead: _______________________
 
 ## Day 1-2: Discovery Phase
 
 ### Day 1: Initial Discovery & Planning
-
 1. **Kickoff Meeting** (2 hours)
    - Introduction to implementation team and stakeholders
-   - Review implementation plan and timeline
+   - Review implementation plan and timeline based on agreed scope
    - Confirm project objectives and success criteria
+   - Review scope definition document and validate
 
 2. **Cloud Provider Discovery** (4 hours)
-   - Document all cloud accounts in scope:
+   - Document all in-scope cloud accounts:
      - [AWS accounts and organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
      - [Azure subscriptions and management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
      - [GCP projects and organizations](https://cloud.google.com/resource-manager/docs/creating-managing-projects)
      - [OCI tenancies and compartments](https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcompartments.htm)
    - Verify cloud account access permissions meet CrowdStrike requirements:
-     - **AWS Requirements**:
+     - **AWS Requirements**: 
        - [AWS CSPM Requirements](https://falcon.crowdstrike.com/documentation/page/d2f7e2d8/plan-your-aws-account-registration#l9985288)
        - [AWS IAM Permission Requirements](https://falcon.crowdstrike.com/documentation/page/d2f7e2d8/plan-your-aws-account-registration)
-     - **Azure Requirements**:
+     - **Azure Requirements**: 
        - [Azure CSPM Requirements](https://falcon.crowdstrike.com/documentation/page/a79d97dd/register-an-azure-account-using-bash#le899526)
        - [Azure IAM Role Requirements](https://falcon.crowdstrike.com/documentation/page/a79d97dd/register-an-azure-account-using-bash)
-     - **GCP Requirements**:
+     - **GCP Requirements**: 
        - [GCP CSPM Requirements](https://falcon.crowdstrike.com/documentation/page/c9209855/register-a-gcp-account#k9f2f90e)
        - [GCP Service Account Requirements](https://falcon.crowdstrike.com/documentation/page/c9209855/register-a-gcp-account)
-     - **OCI Requirements**:
+     - **OCI Requirements**: 
        - [OCI CSPM Requirements](https://falcon.crowdstrike.com/documentation/page/d58e4fa5/register-an-oci-tenancy)
        - [OCI IAM Policy Requirements](https://falcon.crowdstrike.com/documentation/page/d58e4fa5/register-an-oci-tenancy#ladb73be)
 
@@ -46,9 +135,8 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
      - [Required API Permissions by Cloud Provider](https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis)
 
 ### Day 2: Workload & Registry Discovery
-
 1. **Cloud Workload Discovery** (4 hours)
-   - Inventory cloud instances:
+   - Inventory in-scope cloud instances:
      - [AWS EC2 Instance Inventory](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-inventory.html)
      - [Azure VM Inventory](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/vminsights-enable-overview)
      - [GCP VM Inventory](https://cloud.google.com/compute/docs/instances/view-os-details)
@@ -61,7 +149,7 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
      - [Supported Operating Systems](https://falcon.crowdstrike.com/documentation/page/61722/supported-operating-systems)
 
 2. **Container Registry Discovery** (2 hours)
-   - Inventory all container registries
+   - Inventory all in-scope container registries
      - [AWS ECR Inventory](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html)
      - [Azure ACR Inventory](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
      - [GCP Artifact Registry Inventory](https://cloud.google.com/artifact-registry/docs/repositories/manage-repos)
@@ -81,7 +169,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 ## Day 3-4: Phase 1 - Onboard Cloud Security Posture Management
 
 ### Day 3: AWS & Azure CSPM Onboarding
-
 1. **AWS CSPM Deployment** (4 hours)
    - Create AWS IAM roles with required permissions
      - [AWS IAM Role Creation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)
@@ -111,7 +198,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
      - [Manage Azure Tenant Registration](https://falcon.crowdstrike.com/documentation/page/a79d97dd/register-an-azure-account-using-bash#wcb59101)
 
 ### Day 4: GCP & OCI CSPM Onboarding
-
 1. **GCP CSPM Deployment** (3 hours)
    - Create GCP service account with required permissions
      - [Creating a GCP Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
@@ -147,7 +233,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 ## Day 5: Phase 2 - Deploy Sensors to Workloads
 
 ### Day 5: Sensor Deployment
-
 1. **AWS Workload Sensor Deployment** (3 hours)
    - Enable 1-click sensor deployment for AWS accounts
      - [Deploy Sensors Using AWS SSM](https://falcon.crowdstrike.com/documentation/page/cloud-security/deploy-sensors-using-aws-ssm)
@@ -179,16 +264,13 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
      - [Falcon Helm Repository](https://github.com/CrowdStrike/falcon-helm/tree/main)
      - [Falcon Helm Chart Documentation](https://github.com/CrowdStrike/falcon-helm/blob/main/helm-charts/falcon-sensor/README.md)
    - Deploy node-level sensors for standard Kubernetes clusters
-
-     ``` 
+     ```
      helm upgrade --install falcon-helm crowdstrike/falcon-sensor \
          --set falcon.cid="<CrowdStrike_CID>" \
          --set node.image.repository="<Your_Registry>/falcon-node-sensor"
      ```
-
      - [Node-level Kubernetes Sensor Installation](https://github.com/CrowdStrike/falcon-helm/blob/main/helm-charts/falcon-sensor/README.md#installing-on-kubernetes-cluster-nodes)
    - Deploy container sensors as sidecars for managed Kubernetes services
-
      ```
      helm upgrade --install falcon-helm crowdstrike/falcon-sensor \
          --set node.enabled=false \
@@ -196,7 +278,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
          --set falcon.cid="<CrowdStrike_CID>" \
          --set container.image.repository="<Your_Registry>/falcon-sensor"
      ```
-
      - [Container Sidecar Sensor Installation](https://github.com/CrowdStrike/falcon-helm/blob/main/helm-charts/falcon-sensor/README.md#installing-in-kubernetes-cluster-as-a-sidecar)
    - Configure Pod Security Standards for Kubernetes 1.25+
      - [Pod Security Standards Configuration](https://github.com/CrowdStrike/falcon-helm/blob/main/helm-charts/falcon-sensor/README.md#pod-security-standards)
@@ -206,7 +287,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 ## Day 6: Phase 3 - Connect Registries for Image Assessment
 
 ### Day 6: Registry Integration
-
 1. **AWS ECR Integration** (2 hours)
    - Create IAM roles for ECR registry access
      - [AWS IAM Role Requirements for ECR](https://falcon.crowdstrike.com/documentation/page/image-assessment/connect-your-image-registries#ecr)
@@ -250,7 +330,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 ## Day 7: Phase 4 - Customization & Handover
 
 ### Day 7: Finalization & Knowledge Transfer
-
 1. **Policy Customization** (3 hours)
    - Configure custom policy settings based on organizational requirements
      - [Cloud Security Policy Management](https://falcon.crowdstrike.com/documentation/page/67fa9b3f/manage-cloud-security-policies)
@@ -278,7 +357,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
      - [Cloud Security Best Practices](https://falcon.crowdstrike.com/documentation/page/de1e9612/best-practices-for-cloud-security)
 
 ## Post-Implementation Activities
-
 1. **Review initial findings** (1 week after implementation)
    - Analyze discovered vulnerabilities and misconfigurations
      - [Cloud Security Posture Findings](https://falcon.crowdstrike.com/documentation/page/cd2afef6/respond-to-misconfiguration-findings)
@@ -305,7 +383,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 ## Implementation Checklist & Value Realization
 
 ### Phase 1: Cloud Account Registration
-
 - [ ] Complete AWS accounts registration
 - [ ] Complete Azure tenant/subscriptions registration
 - [ ] Complete GCP organizations/projects registration
@@ -318,7 +395,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 **Value Checkpoint:** Immediate protection and security insights based on IOMs and IOAs without requiring complex setup or configuration.
 
 ### Phase 2: Sensor Deployment
-
 - [ ] Deploy sensors to AWS EC2 instances
 - [ ] Deploy sensors to Azure VMs and GCP instances
 - [ ] Deploy sensors to Kubernetes environments
@@ -330,7 +406,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 **Value Checkpoint:** Comprehensive real-time cloud workload monitoring providing enterprise-grade security from the moment of deployment.
 
 ### Phase 3: Registry Scanning
-
 - [ ] Connect AWS ECR registries
 - [ ] Connect Azure and GCP container registries
 - [ ] Connect additional registries (Docker Hub, JFrog, etc.)
@@ -343,7 +418,6 @@ This implementation plan outlines a structured approach to deploy CrowdStrike Cl
 **Value Checkpoint:** Immediate security visibility into container images without requiring complex configuration or setup steps.
 
 ### Phase 4: Platform Customization
-
 - [ ] Configure custom policies based on organizational requirements
 - [ ] Set up custom dashboards and reports
 - [ ] Configure notification channels for critical alerts
