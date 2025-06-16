@@ -82,7 +82,14 @@ The following items require clear Yes/No decisions from the customer to define t
      - [ ] CircleCI: Yes ☐ No ☐
      - [ ] Other (please specify): _______________________
 
-6. **Additional Requirements**
+6. **AWS-Specific Features**
+   - [ ] Data Security Posture Management: Yes ☐ No ☐ N/A ☐
+   - [ ] Snapshot: Yes ☐ No ☐ N/A ☐
+   - [ ] 1-Click Sensor Deployment: Yes ☐ No ☐ N/A ☐
+   - [ ] Identity Protection: Yes ☐ No ☐ N/A ☐
+
+7. **Additional Requirements**
+   - [ ] Application Security Posture Management: Yes ☐ No ☐
    - [ ] Custom dashboards: Yes ☐ No ☐
    - [ ] Integration with existing SIEM: Yes ☐ No ☐
    - [ ] Integration with ticketing system: Yes ☐ No ☐
